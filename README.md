@@ -21,6 +21,7 @@
             overflow-x: hidden;
         }
         
+        /* 顶部导航栏 */
         .header {
             background-color: #1d6fa3;
             color: white;
@@ -36,6 +37,7 @@
             font-weight: normal;
         }
         
+        /* 主容器 */
         .container {
             display: flex;
             width: 100%;
@@ -43,6 +45,7 @@
             padding-top: 5px;
         }
         
+        /* 左侧分类导航 */
         .category-nav {
             width: 25%;
             background: white;
@@ -50,7 +53,7 @@
             position: sticky;
             top: 0;
             overflow-y: auto;
-            box-shadow: 2px 0 极速响应 rgba(0, 0, 0, 0.05);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
             z-index: 5;
         }
         
@@ -60,8 +63,8 @@
         }
         
         .category-nav li {
-            padding: 15px 15px;
-            font-size: 15px;
+            padding: 12px 15px;
+            font-size: 14px;
             border-left: 4px solid transparent;
             transition: all 0.3s;
             cursor: pointer;
@@ -74,6 +77,7 @@
             border-left: 4px solid #1d6fa3;
         }
         
+        /* 主商品区 */
         .main-content {
             flex: 1;
             padding: 10px 10px 80px;
@@ -85,6 +89,7 @@
         .section-title {
             padding: 8px 10px;
             font-size: 16px;
+            font-weight: bold;
             color: #1d6fa3;
             background-color: #eef7fd;
             margin: 10px 0;
@@ -120,6 +125,7 @@
             align-items: center;
             justify-content: center;
             color: #1d6fa3;
+            font-size: 36px;
         }
         
         .item-info {
@@ -131,7 +137,7 @@
             font-size: 14px;
             height: 40px;
             overflow: hidden;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             line-height: 1.4;
         }
         
@@ -174,6 +180,7 @@
             text-align: center;
         }
         
+        /* 购物车 */
         .cart-container {
             position: fixed;
             bottom: 20px;
@@ -184,7 +191,7 @@
         .cart-icon {
             width: 60px;
             height: 60px;
-            background-color: #1极速响应6fa3;
+            background-color: #1d6fa3;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -296,6 +303,7 @@
             background-color: #ccc;
         }
         
+        /* 订单结果页 */
         .order-result {
             position: fixed;
             top: 0;
@@ -313,7 +321,7 @@
             flex-grow: 1;
             overflow-y: auto;
             border: 1px solid #eee;
-            padding: 20极速响应;
+            padding: 20px;
             font-family: monospace;
             font-size: 16px;
             line-height: 1.8;
@@ -345,6 +353,7 @@
             color: white;
         }
         
+        /* 响应式调整 */
         @media (max-width: 768px) {
             .items-grid {
                 grid-template-columns: 1fr 1fr;
@@ -367,6 +376,7 @@
     </div>
     
     <div class="container">
+        <!-- 左侧分类导航 -->
         <div class="category-nav">
             <ul>
                 <li class="active" data-category="beverages">水及饮料</li>
@@ -378,27 +388,47 @@
             </ul>
         </div>
         
+        <!-- 主商品区 -->
         <div class="main-content">
+            <!-- 水及饮料 -->
             <div class="section-title" id="beverages">水及饮料</div>
-            <div class="items-grid" id="beverages-grid"></div>
+            <div class="items-grid" id="beverages-grid">
+                <!-- 饮料商品将通过JS动态生成 -->
+            </div>
             
+            <!-- 乳制品 -->
             <div class="section-title" id="dairy">乳制品</div>
-            <div class="items-grid" id="dairy-grid"></div>
+            <div class="items-grid" id="dairy-grid">
+                <!-- 乳制品商品将通过JS动态生成 -->
+            </div>
             
+            <!-- 方便面 -->
             <div class="section-title" id="noodles">方便面</div>
-            <div class="items-grid" id="noodles-grid"></div>
+            <div class="items-grid" id="noodles-grid">
+                <!-- 方便面商品将通过JS动态生成 -->
+            </div>
             
+            <!-- 面包饼干 -->
             <div class="section-title" id="bakery">面包饼干</div>
-            <div class="items-grid" id="bakery-grid"></div>
+            <div class="items-grid" id="bakery-grid">
+                <!-- 面包饼干商品将通过JS动态生成 -->
+            </div>
             
+            <!-- 冲泡类 -->
             <div class="section-title" id="beverage">冲泡类</div>
-            <div class="items-grid" id="beverage-grid"></div>
+            <div class="items-grid" id="beverage-grid">
+                <!-- 冲泡类商品将通过JS动态生成 -->
+            </div>
             
+            <!-- 散装食品 -->
             <div class="section-title" id="snacks">散装食品</div>
-            <div class="items-grid" id="snacks-grid"></div>
+            <div class="items-grid" id="snacks-grid">
+                <!-- 散装食品商品将通过JS动态生成 -->
+            </div>
         </div>
     </div>
     
+    <!-- 右下角购物车 -->
     <div class="cart-container">
         <div class="cart-icon" id="cartToggle">
             <i class="fas fa-shopping-cart"></i>
@@ -410,7 +440,9 @@
                 <h3>购物车</h3>
                 <span>点击可修改数量</span>
             </div>
-            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-items" id="cartItems">
+                <!-- 购物车项目将在此动态生成 -->
+            </div>
             <div class="cart-footer">
                 <div class="total-price">
                     <span>总计:</span>
@@ -421,17 +453,20 @@
         </div>
     </div>
     
+    <!-- 订单结果页面 -->
     <div class="order-result" id="orderResult">
         <h2 style="text-align:center; margin:15px 0; color:#1d6fa3;">订单详情</h2>
-        <div class="result-content" id="orderContent"></div>
+        <div class="result-content" id="orderContent">
+            <!-- 订单详情将在此动态生成 -->
+        </div>
         <div class="result-controls">
             <button class="result-btn back-btn" id="backBtn">返回修改</button>
-            <button class="result-btn copy-btn"极速响应"copyBtn">复制结果</button>
+            <button class="result-btn copy-btn" id="copyBtn">复制结果</button>
         </div>
     </div>
 
     <script>
-        // 商品数据
+        // 商品数据 - 包含您提供的所有商品
         const products = {
             beverages: [
                 {id: 1, name: "佳德乐 (600ml*15)", price: 60, icon: "fas fa-wine-bottle"},
@@ -453,7 +488,7 @@
                 {id: 17, name: "元气森林 (480ml*15)", price: 56, icon: "fas fa-bolt"},
                 {id: 18, name: "旺仔牛奶 (245ml*12)", price: 58, icon: "fas fa-cow"},
                 {id: 19, name: "喜多多 (200g*12)", price: 37, icon: "fas fa-cannabis"},
-                {id: 20, name: "统一阿萨姆奶茶 (500ml*极速响应)", price: 56, icon: "fas fa-mug-hot"},
+                {id: 20, name: "统一阿萨姆奶茶 (500ml*15)", price: 56, icon: "fas fa-mug-hot"},
                 {id: 21, name: "统一红茶 (500ml*15)", price: 35, icon: "fas fa-mug-hot"},
                 {id: 22, name: "怡宝菊花茶 (450ml*15)", price: 48, icon: "fas fa-mug-hot"},
                 {id: 23, name: "银鹭八宝粥 (360g*12)", price: 39, icon: "fas fa-utensil-spoon"},
@@ -463,10 +498,10 @@
                 {id: 27, name: "银鹭绿豆汤 (370g*12)", price: 43, icon: "fas fa-utensil-spoon"},
                 {id: 28, name: "银鹭花生牛奶 (360g*12)", price: 43, icon: "fas fa-glass-whiskey"},
                 {id: 29, name: "娃哈哈八宝粥 (360g*12)", price: 45, icon: "fas fa-utensil-spoon"},
-                {id: 30, name: "娃哈哈营养快线 (350g*15)", price: 46, icon极速响应"fas fa-glass-whiskey"},
+                {id: 30, name: "娃哈哈营养快线 (350g*15)", price: 46, icon: "fas fa-glass-whiskey"},
                 {id: 31, name: "娃哈哈AD钙奶 (450ml*15)", price: 65, icon: "fas fa-glass-whiskey"},
                 {id: 32, name: "娃哈哈苏打水 (500ml*15)", price: 65, icon: "fas fa-tint"},
-                {id: 33, name: "娃哈哈矿泉水 (596ml*24)", price: 28, icon: "fas fa-t极速响应"},
+                {id: 33, name: "娃哈哈矿泉水 (596ml*24)", price: 28, icon: "fas fa-tint"},
                 {id: 34, name: "娃哈哈矿泉水 (1.5L*12)", price: 29, icon: "fas fa-tint"},
                 {id: 35, name: "苏萨椰子水 (333ml*15)", price: 85, icon: "fas fa-glass-whiskey"},
                 {id: 36, name: "农夫山泉茶π (500ml*15)", price: 62, icon: "fas fa-mug-hot"},
@@ -479,7 +514,7 @@
                 {id: 41, name: "光明噜渴奶 (458ml*20)", price: 155, icon: "fas fa-glass-whiskey"},
                 {id: 42, name: "光明噜渴奶 (200ml*12)", price: 58, icon: "fas fa-glass-whiskey"},
                 {id: 43, name: "蒙牛核桃奶 (250ml*24)", price: 70, icon: "fas fa-glass-whiskey"},
-                {id: 44, name: "蒙牛纯牛奶 (250ml*24)", price: 极速响应, icon: "fas fa-glass-whiskey"},
+                {id: 44, name: "蒙牛纯牛奶 (250ml*24)", price: 65, icon: "fas fa-glass-whiskey"},
                 {id: 45, name: "蒙牛特仑苏牛奶 (250ml*24)", price: 53, icon: "fas fa-glass-whiskey"},
                 {id: 46, name: "伊利金典有机奶 (250ml*10)", price: 68, icon: "fas fa-glass-whiskey"},
                 {id: 47, name: "味动力 (330ml*12)", price: 56, icon: "fas fa-glass-whiskey"},
@@ -500,7 +535,7 @@
             ],
             bakery: [
                 {id: 60, name: "奥利奥饼干 (97g*24)", price: 156, icon: "fas fa-cookie"},
-                {id: 61, name: "旺旺雪饼 (84g*20)", price: 138极速响应 icon: "fas fa-cookie"},
+                {id: 61, name: "旺旺雪饼 (84g*20)", price: 138, icon: "fas fa-cookie"},
                 {id: 62, name: "小白心里软 (1*4斤)", price: 90, icon: "fas fa-bread-slice"},
                 {id: 63, name: "沃隆坚果 (1*750克)", price: 100, icon: "fas fa-seedling"},
                 {id: 64, name: "每日坚果 (25g*30)", price: 100, icon: "fas fa-seedling"},
@@ -511,13 +546,13 @@
                 {id: 69, name: "双汇王中王火腿肠 (3.6kg)", price: 110, icon: "fas fa-drumstick-bite"},
                 {id: 70, name: "德芙 (43g*12)", price: 105, icon: "fas fa-candy-cane"},
                 {id: 71, name: "鸽鸽豆角干 (5kg)", price: 175, icon: "fas fa-seedling"},
-                {极速响应: 72, name: "绿箭 (1*20条)", price: 38, icon: "fas fa-candy-cane"},
-                {id: 73, name: "达利园瑞士卷 (极速响应*2.5kg)", price: 95, icon: "fas fa-cookie"},
+                {id: 72, name: "绿箭 (1*20条)", price: 38, icon: "fas fa-candy-cane"},
+                {id: 73, name: "达利园瑞士卷 (1*2.5kg)", price: 95, icon: "fas fa-cookie"},
                 {id: 74, name: "达利园蛋黄派 (1*2.5kg)", price: 82, icon: "fas fa-cookie"},
                 {id: 75, name: "达利园小面包 (1*2.5kg)", price: 92, icon: "fas fa-bread-slice"},
                 {id: 76, name: "达利园软面包 (1*2.5kg)", price: 92, icon: "fas fa-bread-slice"},
                 {id: 77, name: "谷友佳手撕面包 (1*2.5kg)", price: 88, icon: "fas fa-bread-slice"},
-                {id: 78, name: "吐司面包 (1*2.5极速响应)", price: 88, icon: "fas fa-bread-slice"}
+                {id: 78, name: "吐司面包 (1*2.5kg)", price: 88, icon: "fas fa-bread-slice"}
             ],
             beverage: [
                 {id: 79, name: "正山小种 (1*100g)", price: 78, icon: "fas fa-mug-hot"},
@@ -532,7 +567,7 @@
                 {id: 86, name: "好丽友蛋黄派 (138g/盒)", price: 11.5, icon: "fas fa-cookie"},
                 {id: 87, name: "好丽友巧克力 (222g/盒)", price: 11.5, icon: "fas fa-candy-cane"},
                 {id: 88, name: "好丽友薯愿蜂蜜牛奶 (104g/盒)", price: 8, icon: "fas fa-cookie"},
-                {id: 89, name: "士力架 (1*400g)", price: 45, icon:极速响应"fas fa-candy-cane"},
+                {id: 89, name: "士力架 (1*400g)", price: 45, icon: "fas fa-candy-cane"},
                 {id: 90, name: "可比克 (1*105g)", price: 8, icon: "fas fa-cookie"},
                 {id: 91, name: "锐源阿姣枣 (1*200g)", price: 3.5, icon: "fas fa-apple-alt"},
                 {id: 92, name: "牡丹亭多味花生 (1*60g)", price: 2.5, icon: "fas fa-seedling"},
@@ -548,18 +583,18 @@
                 {id: 102, name: "甘源蟹黄蚕豆 (1*75g)", price: 4.5, icon: "fas fa-seedling"},
                 {id: 103, name: "甘源蟹黄瓜子 (1*75g)", price: 4.5, icon: "fas fa-seedling"},
                 {id: 104, name: "天之湘鸭掌 (1*90g)", price: 10, icon: "fas fa-drumstick-bite"},
-                {id: 105, name: "天之湘鸭翅 (1*60g)", price: 8, icon: "fas fa-drumstick-b极速响应"},
+                {id: 105, name: "天之湘鸭翅 (1*60g)", price: 8, icon: "fas fa-drumstick-bite"},
                 {id: 106, name: "无穷酱卤鸡翅根 (20g*20袋)", price: 80, icon: "fas fa-drumstick-bite"},
                 {id: 107, name: "无穷酱卤鸭翅根 (30g*16袋)", price: 72, icon: "fas fa-drumstick-bite"},
                 {id: 108, name: "无穷卤鸡爪 (1*75g)", price: 14, icon: "fas fa-drumstick-bite"},
                 {id: 109, name: "无穷爱辣鸡腿 (1*70g)", price: 14, icon: "fas fa-drumstick-bite"},
                 {id: 110, name: "卫龙大辣棒 (*10)", price: 45, icon: "fas fa-carrot"},
-                {极速响应: 111, name: "卫龙魔芋爽 (50g*10)", price: 45, icon: "fas fa-carrot"},
+                {id: 111, name: "卫龙魔芋爽 (50g*10)", price: 45, icon: "fas fa-carrot"},
                 {id: 112, name: "好丽友呀土豆牛排味 (1*40g)", price: 4, icon: "fas fa-cookie"},
                 {id: 113, name: "好丽友呀土豆蕃茄味 (1*40g)", price: 4, icon: "fas fa-cookie"},
                 {id: 114, name: "寻香记糯米锅巴 (1*105g)", price: 2.5, icon: "fas fa-cookie"},
-                {id: 115, name: "香舟金针菇 (26g*极速响应)", price: 24, icon: "fas fa-seedling"},
-                {id: 116, name: "恒康碧根极速响应仁 (1*108g)", price: 33, icon: "fas fa-seedling"},
+                {id: 115, name: "香舟金针菇 (26g*20)", price: 24, icon: "fas fa-seedling"},
+                {id: 116, name: "恒康碧根果仁 (1*108g)", price: 33, icon: "fas fa-seedling"},
                 {id: 117, name: "恒康琥珀桃仁 (1*125g)", price: 19, icon: "fas fa-seedling"},
                 {id: 118, name: "恒康蜂蜜桃仁 (1*125g)", price: 19, icon: "fas fa-seedling"},
                 {id: 119, name: "恒康香酥腰果 (1*120g)", price: 22, icon: "fas fa-seedling"},
@@ -567,7 +602,7 @@
                 {id: 121, name: "青豪园老婆梅 (1*210g)", price: 10, icon: "fas fa-apple-alt"},
                 {id: 122, name: "青豪园橄榄 (1*235g)", price: 10, icon: "fas fa-apple-alt"},
                 {id: 123, name: "青豪园杨梅 (1*190g)", price: 10, icon: "fas fa-apple-alt"},
-                {id: 124, name: "爱尚咪咪虾条 (1*180g)", price: 6极速响应 icon: "fas fa-cookie"},
+                {id: 124, name: "爱尚咪咪虾条 (1*180g)", price: 6, icon: "fas fa-cookie"},
                 {id: 125, name: "零零亲炭秘卤锁骨 (1*65g)", price: 8, icon: "fas fa-drumstick-bite"},
                 {id: 126, name: "零零亲炭秘卤鸭翅根 (1*70g)", price: 8, icon: "fas fa-drumstick-bite"},
                 {id: 127, name: "零零亲炭秘卤鸭脖 (1*70g)", price: 8, icon: "fas fa-drumstick-bite"},
@@ -575,7 +610,7 @@
                 {id: 129, name: "伊道香泡椒凤爪 (1*100g)", price: 5, icon: "fas fa-drumstick-bite"},
                 {id: 130, name: "瑶红麻辣猪蹄 (1*150g)", price: 14, icon: "fas fa-drumstick-bite"},
                 {id: 131, name: "王老大麻辣猪蹄 (1*135g)", price: 14, icon: "fas fa-drumstick-bite"},
-                {id: 132, name极速响应"啃仔鸭爪 (105g)(1*105g)", price: 8, icon: "fas fa-drumstick-bite"},
+                {id: 132, name: "啃仔鸭爪 (105g)(1*105g)", price: 8, icon: "fas fa-drumstick-bite"},
                 {id: 133, name: "王子辣条 (110g)(1*110g)", price: 6, icon: "fas fa-carrot"},
                 {id: 134, name: "港州芒果干 (1*90g)", price: 11, icon: "fas fa-apple-alt"},
                 {id: 135, name: "青豪园草莓干 (1*70g)", price: 11, icon: "fas fa-apple-alt"},
@@ -591,28 +626,28 @@
                 {id: 145, name: "零零亲猪肉脯 (1*65g)", price: 13, icon: "fas fa-drumstick-bite"},
                 {id: 146, name: "零零亲鲜香牛肉 (1*72g)", price: 13, icon: "fas fa-drumstick-bite"},
                 {id: 147, name: "零零亲手撕肉条 (1*60g)", price: 13, icon: "fas fa-drumstick-bite"},
-                {id: 148, name: "泰国脆脆条 (极速响应*75g)", price: 7, icon: "fas fa-cookie"},
+                {id: 148, name: "泰国脆脆条 (1*75g)", price: 7, icon: "fas fa-cookie"},
                 {id: 149, name: "天之湘素牛排 (1*80g)", price: 8, icon: "fas fa-carrot"},
                 {id: 150, name: "天之湘辣子鸡丁 (1*80g)", price: 8, icon: "fas fa-drumstick-bite"},
                 {id: 151, name: "天之湘虎皮凤爪 (1*90g)", price: 10, icon: "fas fa-drumstick-bite"},
                 {id: 152, name: "天之湘手撕肉干 (1*45g)", price: 8, icon: "fas fa-drumstick-bite"},
-                {id: 153, name: "天之湘风干烤脖 (1*70极速响应)", price: 极速响应, icon: "fas fa-drumstick-bite"},
-                {id: 154, name: "天之湘酒鬼鱼仔 (1*极速响应g)", price: 8, icon: "fas fa-fish"},
+                {id: 153, name: "天之湘风干烤脖 (1*70g)", price: 8, icon: "fas fa-drumstick-bite"},
+                {id: 154, name: "天之湘酒鬼鱼仔 (1*50g)", price: 8, icon: "fas fa-fish"},
                 {id: 155, name: "富食村去骨凤爪 (1*80g)", price: 10, icon: "fas fa-drumstick-bite"},
                 {id: 156, name: "小飞燕汤泡臭豆腐 (1*108g)", price: 5, icon: "fas fa-drumstick-bite"},
                 {id: 157, name: "与美手剥笋 (1*200g)", price: 6, icon: "fas fa-carrot"},
-极速响应            {id: 158, name: "竹香园泡椒笋尖 (1*100g)", price: 4, icon: "fas fa-carrot"},
+                {id: 158, name: "竹香园泡椒笋尖 (1*100g)", price: 4, icon: "fas fa-carrot"},
                 {id: 159, name: "依夫南瓜干 (1*100g)", price: 4, icon: "fas fa-carrot"},
                 {id: 160, name: "依夫茄子干 (1*100g)", price: 4, icon: "fas fa-carrot"},
                 {id: 161, name: "齐云山枣糕 (1*300g)", price: 25, icon: "fas fa-cookie"},
                 {id: 162, name: "齐云山枣糕 (1*150g)", price: 12.5, icon: "fas fa-cookie"},
                 {id: 163, name: "乐事 (1*70g)", price: 7, icon: "fas fa-cookie"},
-                {id: 164, name极速响应"纳宝帝威化饼 (1*145g)", price: 7, icon: "fas fa-cookie"},
-                {id: 165, name: "维德麻极速响应 (1*160g)", price: 4, icon: "fas fa-cookie"},
-                {id: 166, name: "好吃点海苔饼 (1*130极速响应)", price: 4.5, icon: "fas极速响应-cookie"},
+                {id: 164, name: "纳宝帝威化饼 (1*145g)", price: 7, icon: "fas fa-cookie"},
+                {id: 165, name: "维德麻花 (1*160g)", price: 4, icon: "fas fa-cookie"},
+                {id: 166, name: "好吃点海苔饼 (1*130g)", price: 4.5, icon: "fas fa-cookie"},
                 {id: 167, name: "星启成黑麦苏打饼 (1*108g)", price: 5, icon: "fas fa-cookie"},
                 {id: 168, name: "香薯爷红薯干 (1*250g)", price: 5, icon: "fas fa-apple-alt"},
-                {id: 169, name: "品优格唱片面包 (1*100g)", price极速响应 4, icon: "fas fa-bread-slice"},
+                {id: 169, name: "品优格唱片面包 (1*100g)", price: 4, icon: "fas fa-bread-slice"},
                 {id: 170, name: "礼良肉松面包 (1*80g)", price: 4, icon: "fas fa-bread-slice"},
                 {id: 171, name: "好印象中华杨梅 (1*55g)", price: 3, icon: "fas fa-apple-alt"},
                 {id: 172, name: "鸽鸽牛肉干 (1*50g)", price: 10, icon: "fas fa-drumstick-bite"},
@@ -627,7 +662,7 @@
                 {id: 181, name: "好丽友木糖醇 (1*101g)", price: 16, icon: "fas fa-candy-cane"},
                 {id: 182, name: "鸽鸽豆角干 (1*69g)", price: 2.5, icon: "fas fa-carrot"},
                 {id: 183, name: "鸽鸽多味花生 (1*70g)", price: 5, icon: "fas fa-seedling"},
-                {id: 184, name: "甜畅海螺酥 (1*90g)", price: 2.5极速响应 icon: "fas fa-cookie"},
+                {id: 184, name: "甜畅海螺酥 (1*90g)", price: 2.5, icon: "fas fa-cookie"},
                 {id: 185, name: "十三妹素沙丁鱼 (1*55g)", price: 3, icon: "fas fa-fish"},
                 {id: 186, name: "零食街跳跳奶棒糖 (1*46g)", price: 5, icon: "fas fa-candy-cane"},
                 {id: 187, name: "绿活牛肉粒 (1*100g)", price: 10, icon: "fas fa-drumstick-bite"},
@@ -722,7 +757,7 @@
                     
                     itemCard.innerHTML = `
                         <div class="item-image">
-                            <i class="${product.icon} fa-3x"></i>
+                            <i class="${product.icon}"></i>
                         </div>
                         <div class="item-info">
                             <div class="item-title">${product.name}</div>
@@ -802,7 +837,7 @@
                 delete cart[id];
                 
                 // 更新卡片数量显示
-                const quantityEl = document.querySelector(`.极速响应-card[data-id="${id}"] .quantity`);
+                const quantityEl = document.querySelector(`.item-card[data-id="${id}"] .quantity`);
                 if (quantityEl) {
                     quantityEl.textContent = 0;
                 }
@@ -872,19 +907,16 @@
             return fixed.endsWith('.0') ? fixed.slice(0, -2) : fixed;
         }
         
-        // 生成订单（输出结果）- 修改后的函数
+        // 生成订单（输出结果）
         function generateOrder() {
             let resultText = '';
             let total = 0;
             
             Object.values(cart).forEach(item => {
-                // 去除商品名称中的规格信息（括号及括号内的内容）
-                const itemName = item.name.replace(/\(.*?\)/g, '').trim();
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
                 
-                // 使用中文逗号作为分隔符
-                resultText += `${itemName}，${item.quantity}，${formatPrice(item.price)}，${formatPrice(itemTotal)}\n`;
+                resultText += `${item.name},${item.quantity},${formatPrice(item.price)},${formatPrice(itemTotal)}\n`;
             });
             
             resultText += `\n订单总计: ${formatPrice(total)}元`;
@@ -901,3 +933,4 @@
     </script>
 </body>
 </html>
+
