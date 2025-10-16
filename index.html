@@ -916,7 +916,8 @@
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
                 
-                resultText += `${item.name},${item.quantity},${formatPrice(item.price)},${formatPrice(itemTotal)}\n`;
+                const cleanName = item.name.replace(/\s*\([^)]*\)/g, "");
+                resultText += `${cleanName}，${item.quantity}，${formatPrice(item.price)}，${formatPrice(itemTotal)}\n`;
             });
             
             resultText += `\n订单总计: ${formatPrice(total)}元`;
