@@ -74,30 +74,116 @@
             border-left: 4px solid #1d6fa3;
         }
 
+        /* 右侧主内容区，灰色背景衬托白色卡片 */
         .main-content {
             flex: 1;
             padding: 10px 10px 80px;
-            background-color: #f8f8f8;
+            background-color: #f0f2f5;
             height: calc(100vh - 60px);
             overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
+        /* 大类标题：美团风格白色卡片头部，无左侧装饰条，底部带蓝色区分线 */
         .section-title {
-            padding: 8px 10px;
+            padding: 12px 15px;
             font-size: 16px;
             font-weight: bold;
-            color: #1d6fa3;
-            background-color: #eef7fd;
-            margin: 10px 0;
-            border-left: 3px solid #1d6fa3;
+            color: #333;
+            background: #ffffff;
+            margin: 25px 0 0 0;
+            border-radius: 12px 12px 0 0;
+            border-bottom: 2px solid #1d6fa3;
+            border-left: none;
         }
 
+        /* 第一个大类标题不需要上边距 (紧靠顶部) */
+        .section-title:first-of-type {
+            margin-top: 5px;
+        }
+
+        /* 商品网格：卡片主体部分，白色背景，圆角底部，与标题无缝连接 */
         .items-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
+            background: #ffffff;
+            padding: 10px 12px 15px;
+            border-radius: 0 0 12px 12px;
+            margin-bottom: 5px;
         }
 
+        /* 子导航区域：紧贴在标题下方，白色背景，与标题和网格融为一体 */
+        .subnav-wrapper {
+            display: flex;
+            align-items: flex-start;
+            background: #ffffff;
+            padding: 0 15px 8px;
+            margin: 0;
+            position: relative;
+        }
+
+        /* 标签容器自动换行，默认最多显示一行 */
+        .subnav-tags {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            max-height: 36px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .subnav-tags.expanded {
+            max-height: 300px;
+        }
+
+        .subnav-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 16px;
+            margin: 0 8px 8px 0;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            color: #555;
+            font-size: 13px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .subnav-tag.active {
+            background-color: #1d6fa3;
+            color: white;
+            font-weight: bold;
+            border-color: #1d6fa3;
+        }
+
+        .subnav-expand-btn {
+            flex-shrink: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #1d6fa3;
+            margin-left: 8px;
+            white-space: nowrap;
+            z-index: 2;
+            height: fit-content;
+        }
+
+        .subnav-expand-btn i {
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        /* 商品卡片保持原有样式 */
         .item-card {
             background: white;
             border-radius: 8px;
@@ -174,64 +260,6 @@
         .quantity-control span {
             min-width: 26px;
             text-align: center;
-        }
-
-        /* 散装食品子导航样式 */
-        .snacks-subnav-wrapper {
-            position: relative;
-            margin: 5px 0 10px 0;
-        }
-        .snacks-subnav {
-            display: flex;
-            flex-wrap: wrap;
-            max-height: 36px;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        .snacks-subnav.expanded {
-            max-height: 300px;
-        }
-        .subnav-tag {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 16px;
-            margin: 0 8px 8px 0;
-            border-radius: 20px;
-            background-color: #f0f0f0;
-            color: #555;
-            font-size: 13px;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid transparent;
-        }
-        .subnav-tag.active {
-            background-color: #1d6fa3;
-            color: white;
-            font-weight: bold;
-            border-color: #1d6fa3;
-        }
-        .subnav-expand-btn {
-            position: absolute;
-            right: 0;
-            top: 0;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            padding: 4px 10px;
-            font-size: 13px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            color: #1d6fa3;
-            box-shadow: -2px 0 5px rgba(255,255,255,0.8);
-            z-index: 2;
-        }
-        .subnav-expand-btn i {
-            font-size: 12px;
-            transition: transform 0.2s;
         }
 
         /* 购物车 */
@@ -437,29 +465,38 @@
             </ul>
         </div>
 
-        <div class="main-content">
+        <div class="main-content" id="mainContent">
+            <!-- 水及饮料 -->
             <div class="section-title" id="beverages">水及饮料</div>
+            <div class="subnav-wrapper" id="beveragesSubnavWrapper">
+                <div class="subnav-tags" id="beveragesSubnav"></div>
+                <span class="subnav-expand-btn" id="beveragesExpandBtn" style="display:none;">
+                    展开 <i class="fas fa-chevron-down"></i>
+                </span>
+            </div>
             <div class="items-grid" id="beverages-grid"></div>
 
+            <!-- 乳制品 -->
             <div class="section-title" id="dairy">乳制品</div>
             <div class="items-grid" id="dairy-grid"></div>
 
+            <!-- 方便面 -->
             <div class="section-title" id="noodles">方便面</div>
             <div class="items-grid" id="noodles-grid"></div>
 
+            <!-- 面包饼干 -->
             <div class="section-title" id="bakery">面包饼干</div>
             <div class="items-grid" id="bakery-grid"></div>
 
+            <!-- 冲泡类 -->
             <div class="section-title" id="beverage">冲泡类</div>
             <div class="items-grid" id="beverage-grid"></div>
 
-            <!-- 散装食品区域，包含子导航 -->
+            <!-- 散装食品 -->
             <div class="section-title" id="snacks">散装食品</div>
-            <div class="snacks-subnav-wrapper" id="snacksSubnavWrapper">
-                <div class="snacks-subnav" id="snacksSubnav">
-                    <!-- 动态生成椭圆标签 -->
-                </div>
-                <span class="subnav-expand-btn" id="subnavExpandBtn" style="display:none;">
+            <div class="subnav-wrapper" id="snacksSubnavWrapper">
+                <div class="subnav-tags" id="snacksSubnav"></div>
+                <span class="subnav-expand-btn" id="snacksExpandBtn" style="display:none;">
                     展开 <i class="fas fa-chevron-down"></i>
                 </span>
             </div>
@@ -499,48 +536,48 @@
     </div>
 
     <script>
-        // 商品数据，散装食品合并并带subcategory字段
+        // 商品数据，水及饮料和散装食品均带有subcategory字段
         const products = {
             beverages: [
-                { id: 2, name: "红牛 (250ml*24)", price: 125, icon: "fas fa-bolt" },
-                { id: 3, name: "加多宝 (310ml*24)", price: 62, icon: "fas fa-cannabis" },
-                { id: 4, name: "怡宝水 (555ml*24)", price: 28, icon: "fas fa-tint" },
-                { id: 5, name: "中百事可乐 (500ml*24)", price: 60, icon: "fas fa-glass-whiskey" },
-                { id: 6, name: "中美年达 (500ml*24)", price: 60, icon: "fas fa-glass-whiskey" },
-                { id: 7, name: "听七喜 (330ml*24)", price: 46, icon: "fas fa-glass-whiskey" },
-                { id: 8, name: "听百事可乐 (330ml*24)", price: 46, icon: "fas fa-glass-whiskey" },
-                { id: 9, name: "听美年达 (330ml*24)", price: 46, icon: "fas fa-glass-whiskey" },
-                { id: 10, name: "雀巢咖啡268ML (268ml*15)", price: 72, icon: "fas fa-coffee" },
-                { id: 11, name: "东方树叶 (500ml*15)", price: 62, icon: "fas fa-leaf" },
-                { id: 12, name: "中果粒 (450ml*24)", price: 76, icon: "fas fa-apple-alt" },
-                { id: 13, name: "尖叫 (550ml*15)", price: 60, icon: "fas fa-bolt" },
-                { id: 14, name: "东鹏特饮 (250ml*24)", price: 67, icon: "fas fa-bolt" },
-                { id: 15, name: "脉动 (600ml*15)", price: 60, icon: "fas fa-bolt" },
-                { id: 16, name: "元气森林外星人电解液 (500ml*15)", price: 72, icon: "fas fa-bolt" },
-                { id: 17, name: "元气森林 (480ml*15)", price: 56, icon: "fas fa-bolt" },
-                { id: 18, name: "旺仔牛奶 (245ml*12)", price: 58, icon: "fas fa-cow" },
-                { id: 19, name: "喜多多 (200g*12)", price: 37, icon: "fas fa-cannabis" },
-                { id: 20, name: "统一阿萨姆奶茶 (500ml*15)", price: 56, icon: "fas fa-mug-hot" },
-                { id: 21, name: "统一红茶 (500ml*15)", price: 35, icon: "fas fa-mug-hot" },
-                { id: 22, name: "怡宝菊花茶 (450ml*15)", price: 48, icon: "fas fa-mug-hot" },
-                { id: 23, name: "银鹭八宝粥 (360g*12)", price: 39, icon: "fas fa-utensil-spoon" },
-                { id: 24, name: "银鹭好粥道 (280g*12)", price: 45, icon: "fas fa-utensil-spoon" },
-                { id: 25, name: "银鹭花生奶 (450ml*15)", price: 52, icon: "fas fa-glass-whiskey" },
-                { id: 26, name: "银鹭银耳汤 (270g*12)", price: 43, icon: "fas fa-utensil-spoon" },
-                { id: 27, name: "银鹭绿豆汤 (370g*12)", price: 43, icon: "fas fa-utensil-spoon" },
-                { id: 28, name: "银鹭花生牛奶 (360g*12)", price: 43, icon: "fas fa-glass-whiskey" },
-                { id: 29, name: "娃哈哈八宝粥 (360g*12)", price: 45, icon: "fas fa-utensil-spoon" },
-                { id: 30, name: "娃哈哈营养快线 (350g*15)", price: 46, icon: "fas fa-glass-whiskey" },
-                { id: 31, name: "娃哈哈AD钙奶 (450ml*15)", price: 65, icon: "fas fa-glass-whiskey" },
-                { id: 32, name: "娃哈哈苏打水 (500ml*15)", price: 65, icon: "fas fa-tint" },
-                { id: 33, name: "娃哈哈矿泉水 (596ml*24)", price: 28, icon: "fas fa-tint" },
-                { id: 34, name: "娃哈哈矿泉水 (1.5L*12)", price: 29, icon: "fas fa-tint" },
-                { id: 35, name: "苏萨椰子水 (333ml*15)", price: 85, icon: "fas fa-glass-whiskey" },
-                { id: 36, name: "农夫山泉茶π (500ml*15)", price: 62, icon: "fas fa-mug-hot" },
-                { id: 37, name: "润田翠 (500ml*24)", price: 28, icon: "fas fa-tint" },
-                { id: 38, name: "1.5L怡宝水 (1.5L*12)", price: 29, icon: "fas fa-tint" },
-                { id: 39, name: "4.5L怡宝水 (4.5L*4)", price: 29, icon: "fas fa-tint" },
-                { id: 200, name: "东鹏补水啦 (550ml*24)", price: 72, icon: "fas fa-bolt" }
+                { id: 4, name: "怡宝水 (555ml*24)", price: 28, icon: "fas fa-tint", subcategory: "water" },
+                { id: 33, name: "娃哈哈矿泉水 (596ml*24)", price: 28, icon: "fas fa-tint", subcategory: "water" },
+                { id: 34, name: "娃哈哈矿泉水 (1.5L*12)", price: 29, icon: "fas fa-tint", subcategory: "water" },
+                { id: 37, name: "润田翠 (500ml*24)", price: 28, icon: "fas fa-tint", subcategory: "water" },
+                { id: 38, name: "1.5L怡宝水 (1.5L*12)", price: 29, icon: "fas fa-tint", subcategory: "water" },
+                { id: 39, name: "4.5L怡宝水 (4.5L*4)", price: 29, icon: "fas fa-tint", subcategory: "water" },
+                { id: 32, name: "娃哈哈苏打水 (500ml*15)", price: 65, icon: "fas fa-tint", subcategory: "water" },
+                { id: 5, name: "中百事可乐 (500ml*24)", price: 60, icon: "fas fa-glass-whiskey", subcategory: "carbonated" },
+                { id: 6, name: "中美年达 (500ml*24)", price: 60, icon: "fas fa-glass-whiskey", subcategory: "carbonated" },
+                { id: 7, name: "听七喜 (330ml*24)", price: 46, icon: "fas fa-glass-whiskey", subcategory: "carbonated" },
+                { id: 8, name: "听百事可乐 (330ml*24)", price: 46, icon: "fas fa-glass-whiskey", subcategory: "carbonated" },
+                { id: 9, name: "听美年达 (330ml*24)", price: 46, icon: "fas fa-glass-whiskey", subcategory: "carbonated" },
+                { id: 17, name: "元气森林 (480ml*15)", price: 56, icon: "fas fa-bolt", subcategory: "carbonated" },
+                { id: 2, name: "红牛 (250ml*24)", price: 125, icon: "fas fa-bolt", subcategory: "energy" },
+                { id: 13, name: "尖叫 (550ml*15)", price: 60, icon: "fas fa-bolt", subcategory: "energy" },
+                { id: 14, name: "东鹏特饮 (250ml*24)", price: 67, icon: "fas fa-bolt", subcategory: "energy" },
+                { id: 15, name: "脉动 (600ml*15)", price: 60, icon: "fas fa-bolt", subcategory: "energy" },
+                { id: 16, name: "元气森林外星人电解液 (500ml*15)", price: 72, icon: "fas fa-bolt", subcategory: "energy" },
+                { id: 200, name: "东鹏补水啦 (550ml*24)", price: 72, icon: "fas fa-bolt", subcategory: "energy" },
+                { id: 11, name: "东方树叶 (500ml*15)", price: 62, icon: "fas fa-leaf", subcategory: "tea" },
+                { id: 20, name: "统一阿萨姆奶茶 (500ml*15)", price: 56, icon: "fas fa-mug-hot", subcategory: "tea" },
+                { id: 21, name: "统一红茶 (500ml*15)", price: 35, icon: "fas fa-mug-hot", subcategory: "tea" },
+                { id: 22, name: "怡宝菊花茶 (450ml*15)", price: 48, icon: "fas fa-mug-hot", subcategory: "tea" },
+                { id: 36, name: "农夫山泉茶π (500ml*15)", price: 62, icon: "fas fa-mug-hot", subcategory: "tea" },
+                { id: 3, name: "加多宝 (310ml*24)", price: 62, icon: "fas fa-cannabis", subcategory: "juice" },
+                { id: 12, name: "中果粒 (450ml*24)", price: 76, icon: "fas fa-apple-alt", subcategory: "juice" },
+                { id: 18, name: "旺仔牛奶 (245ml*12)", price: 58, icon: "fas fa-cow", subcategory: "juice" },
+                { id: 25, name: "银鹭花生奶 (450ml*15)", price: 52, icon: "fas fa-glass-whiskey", subcategory: "juice" },
+                { id: 30, name: "娃哈哈营养快线 (350g*15)", price: 46, icon: "fas fa-glass-whiskey", subcategory: "juice" },
+                { id: 31, name: "娃哈哈AD钙奶 (450ml*15)", price: 65, icon: "fas fa-glass-whiskey", subcategory: "juice" },
+                { id: 35, name: "苏萨椰子水 (333ml*15)", price: 85, icon: "fas fa-glass-whiskey", subcategory: "juice" },
+                { id: 10, name: "雀巢咖啡268ML (268ml*15)", price: 72, icon: "fas fa-coffee", subcategory: "other" },
+                { id: 19, name: "喜多多 (200g*12)", price: 37, icon: "fas fa-cannabis", subcategory: "other" },
+                { id: 23, name: "银鹭八宝粥 (360g*12)", price: 39, icon: "fas fa-utensil-spoon", subcategory: "other" },
+                { id: 24, name: "银鹭好粥道 (280g*12)", price: 45, icon: "fas fa-utensil-spoon", subcategory: "other" },
+                { id: 26, name: "银鹭银耳汤 (270g*12)", price: 43, icon: "fas fa-utensil-spoon", subcategory: "other" },
+                { id: 27, name: "银鹭绿豆汤 (370g*12)", price: 43, icon: "fas fa-utensil-spoon", subcategory: "other" },
+                { id: 28, name: "银鹭花生牛奶 (360g*12)", price: 43, icon: "fas fa-glass-whiskey", subcategory: "other" },
+                { id: 29, name: "娃哈哈八宝粥 (360g*12)", price: 45, icon: "fas fa-utensil-spoon", subcategory: "other" }
             ],
             dairy: [
                 { id: 40, name: "光明椰汁牛乳 (330ml*20)", price: 135, icon: "fas fa-glass-whiskey" },
@@ -597,7 +634,6 @@
                 { id: 85, name: "香飘飘奶茶 (1*30)", price: 93, icon: "fas fa-mug-hot" }
             ],
             snacks: [
-                // 膨化食品 puffed
                 { id: 88, name: "好丽友薯愿蜂蜜牛奶 (104g/盒)", price: 8, icon: "fas fa-cookie", subcategory: "puffed" },
                 { id: 90, name: "可比克 (1*105g)", price: 8, icon: "fas fa-cookie", subcategory: "puffed" },
                 { id: 112, name: "好丽友呀土豆牛排味 (1*40g)", price: 4, icon: "fas fa-cookie", subcategory: "puffed" },
@@ -608,7 +644,6 @@
                 { id: 163, name: "乐事 (1*70g)", price: 7, icon: "fas fa-cookie", subcategory: "puffed" },
                 { id: 164, name: "纳宝帝威化饼 (1*145g)", price: 7, icon: "fas fa-cookie", subcategory: "puffed" },
                 { id: 184, name: "甜畅海螺酥 (1*90g)", price: 2.5, icon: "fas fa-cookie", subcategory: "puffed" },
-                // 肉类零食 meat
                 { id: 93, name: "曹师傅麻辣腿 (1*100g)", price: 6.5, icon: "fas fa-drumstick-bite", subcategory: "meat" },
                 { id: 94, name: "香之派香辣鸭掌 (1*30g)", price: 2, icon: "fas fa-drumstick-bite", subcategory: "meat" },
                 { id: 97, name: "郑新初牛肉干 (1*40g)", price: 7.5, icon: "fas fa-drumstick-bite", subcategory: "meat" },
@@ -642,7 +677,6 @@
                 { id: 190, name: "乡思缘鸡胸肉 (98.5g)", price: 6, icon: "fas fa-drumstick-bite", subcategory: "meat" },
                 { id: 191, name: "乡思缘风干大鸭腿 (1*100g)", price: 8, icon: "fas fa-drumstick-bite", subcategory: "meat" },
                 { id: 192, name: "伊拼拼泡椒凤爪 (1*60g)", price: 2.5, icon: "fas fa-drumstick-bite", subcategory: "meat" },
-                // 面包糕点 bakery_snack
                 { id: 86, name: "好丽友蛋黄派 (138g/盒)", price: 11.5, icon: "fas fa-cookie", subcategory: "bakery_snack" },
                 { id: 98, name: "甄好曲奇 (1*93g)", price: 4.5, icon: "fas fa-cookie", subcategory: "bakery_snack" },
                 { id: 99, name: "达利园香葱饼 (1*130g)", price: 4, icon: "fas fa-cookie", subcategory: "bakery_snack" },
@@ -659,7 +693,6 @@
                 { id: 193, name: "艾娃板栗饼 (1*225g)", price: 6, icon: "fas fa-cookie", subcategory: "bakery_snack" },
                 { id: 194, name: "友利多椰蓉面包 (1*200g)", price: 6, icon: "fas fa-bread-slice", subcategory: "bakery_snack" },
                 { id: 195, name: "肖天奇腿型面包 (1*260g)", price: 7, icon: "fas fa-bread-slice", subcategory: "bakery_snack" },
-                // 果脯果干 fruit
                 { id: 91, name: "锐源阿胶枣 (1*200g)", price: 3.5, icon: "fas fa-apple-alt", subcategory: "fruit" },
                 { id: 96, name: "溜溜梅 (1*60g)", price: 5, icon: "fas fa-apple-alt", subcategory: "fruit" },
                 { id: 120, name: "青豪园西梅 (1*180g)", price: 10, icon: "fas fa-apple-alt", subcategory: "fruit" },
@@ -674,7 +707,6 @@
                 { id: 168, name: "香薯爷红薯干 (1*250g)", price: 5, icon: "fas fa-apple-alt", subcategory: "fruit" },
                 { id: 171, name: "好印象中华杨梅 (1*55g)", price: 3, icon: "fas fa-apple-alt", subcategory: "fruit" },
                 { id: 173, name: "零食街紫薯仔 (1*130g)", price: 5, icon: "fas fa-apple-alt", subcategory: "fruit" },
-                // 坚果炒货 nuts
                 { id: 92, name: "牡丹亭多味花生 (1*60g)", price: 2.5, icon: "fas fa-seedling", subcategory: "nuts" },
                 { id: 101, name: "甘源每日豆果 (1*168g)", price: 15, icon: "fas fa-seedling", subcategory: "nuts" },
                 { id: 102, name: "甘源蟹黄蚕豆 (1*75g)", price: 4.5, icon: "fas fa-seedling", subcategory: "nuts" },
@@ -687,7 +719,6 @@
                 { id: 177, name: "甘源青豌豆 (1*75g)", price: 5, icon: "fas fa-seedling", subcategory: "nuts" },
                 { id: 183, name: "鸽鸽多味花生 (1*70g)", price: 5, icon: "fas fa-seedling", subcategory: "nuts" },
                 { id: 95, name: "美好时光海苔 (1*4.5g)", price: 4.5, icon: "fas fa-leaf", subcategory: "nuts" },
-                // 素食豆干 bean
                 { id: 110, name: "卫龙大辣棒 (*10)", price: 45, icon: "fas fa-carrot", subcategory: "bean" },
                 { id: 111, name: "卫龙魔芋爽 (50g*10)", price: 45, icon: "fas fa-carrot", subcategory: "bean" },
                 { id: 115, name: "香舟金针菇 (26g*20)", price: 24, icon: "fas fa-seedling", subcategory: "bean" },
@@ -703,7 +734,6 @@
                 { id: 180, name: "长龙香脆海带丝 (1*120g)", price: 8, icon: "fas fa-leaf", subcategory: "bean" },
                 { id: 182, name: "鸽鸽豆角干 (1*69g)", price: 2.5, icon: "fas fa-carrot", subcategory: "bean" },
                 { id: 185, name: "十三妹素沙丁鱼 (1*55g)", price: 3, icon: "fas fa-fish", subcategory: "bean" },
-                // 糖果巧克力 candy
                 { id: 87, name: "好丽友巧克力 (222g/盒)", price: 11.5, icon: "fas fa-candy-cane", subcategory: "candy" },
                 { id: 89, name: "士力架 (1*400g)", price: 45, icon: "fas fa-candy-cane", subcategory: "candy" },
                 { id: 136, name: "无穷盐焗蛋 (个)", price: 2, icon: "fas fa-egg", subcategory: "candy" },
@@ -715,7 +745,15 @@
             ]
         };
 
-        // 子分类映射
+        const beverageSubCategories = {
+            all: '全部',
+            water: '饮用水',
+            carbonated: '碳酸饮料',
+            energy: '功能饮料',
+            tea: '茶饮',
+            juice: '果汁/蛋白',
+            other: '其他'
+        };
         const snackSubCategories = {
             all: '全部',
             puffed: '膨化食品',
@@ -728,7 +766,8 @@
         };
 
         const cart = {};
-        let currentSnackFilter = 'all'; // 当前散装食品筛选
+        let currentBeverageFilter = 'all';
+        let currentSnackFilter = 'all';
 
         const cartToggle = document.getElementById('cartToggle');
         const cartPanel = document.getElementById('cartPanel');
@@ -740,12 +779,13 @@
         const orderContent = document.getElementById('orderContent');
         const backBtn = document.getElementById('backBtn');
         const copyBtn = document.getElementById('copyBtn');
+        const mainContent = document.getElementById('mainContent');
 
         document.addEventListener('DOMContentLoaded', () => {
             generateAllProducts();
+            generateBeverageSubnav();
             generateSnackSubnav();
 
-            // 左侧导航点击
             document.querySelectorAll('.category-nav li').forEach(item => {
                 item.addEventListener('click', function() {
                     const category = this.dataset.category;
@@ -758,13 +798,13 @@
                 });
             });
 
-            // 购物车悬浮球
+            mainContent.addEventListener('scroll', updateActiveNav);
+
             cartToggle.addEventListener('click', (e) => {
                 e.stopPropagation();
                 cartPanel.classList.toggle('active');
             });
 
-            // 点击外部关闭购物车
             document.addEventListener('click', (e) => {
                 if (!cartPanel.classList.contains('active')) return;
                 if (!cartPanel.contains(e.target) && !cartToggle.contains(e.target)) {
@@ -774,98 +814,102 @@
             cartPanel.addEventListener('click', (e) => e.stopPropagation());
 
             checkoutBtn.addEventListener('click', generateOrder);
-
-            backBtn.addEventListener('click', () => {
-                orderResult.style.display = 'none';
-            });
-
+            backBtn.addEventListener('click', () => { orderResult.style.display = 'none'; });
             copyBtn.addEventListener('click', () => {
                 const text = orderContent.innerText;
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('订单内容已复制到剪贴板！');
-                });
+                navigator.clipboard.writeText(text).then(() => alert('订单内容已复制到剪贴板！'));
             });
 
             cartItems.innerHTML = '<div style="text-align:center; padding:40px; color:#999;">购物车为空</div>';
 
-            // 展开/折叠按钮事件
-            const expandBtn = document.getElementById('subnavExpandBtn');
-            const subnav = document.getElementById('snacksSubnav');
-            if (expandBtn) {
-                expandBtn.addEventListener('click', () => {
-                    subnav.classList.toggle('expanded');
-                    if (subnav.classList.contains('expanded')) {
-                        expandBtn.innerHTML = '收起 <i class="fas fa-chevron-up"></i>';
-                    } else {
-                        expandBtn.innerHTML = '展开 <i class="fas fa-chevron-down"></i>';
-                    }
-                });
-            }
+            setupExpandBtn('beveragesSubnav', 'beveragesExpandBtn');
+            setupExpandBtn('snacksSubnav', 'snacksExpandBtn');
         });
 
-        // 生成散装食品子导航标签
-        function generateSnackSubnav() {
-            const subnavContainer = document.getElementById('snacksSubnav');
-            const wrapper = document.getElementById('snacksSubnavWrapper');
-            subnavContainer.innerHTML = '';
+        function setupExpandBtn(subnavId, btnId) {
+            const subnav = document.getElementById(subnavId);
+            const btn = document.getElementById(btnId);
+            if (!subnav || !btn) return;
+            btn.addEventListener('click', () => {
+                subnav.classList.toggle('expanded');
+                btn.innerHTML = subnav.classList.contains('expanded') ? 
+                    '收起 <i class="fas fa-chevron-up"></i>' : 
+                    '展开 <i class="fas fa-chevron-down"></i>';
+            });
+        }
 
-            // 创建标签
-            for (const [key, value] of Object.entries(snackSubCategories)) {
+        function updateActiveNav() {
+            const scrollTop = mainContent.scrollTop;
+            const titles = document.querySelectorAll('.section-title');
+            let current = 'beverages';
+            titles.forEach(title => {
+                if (scrollTop >= title.offsetTop - 20) current = title.id;
+            });
+            document.querySelectorAll('.category-nav li').forEach(li => {
+                li.classList.toggle('active', li.dataset.category === current);
+            });
+        }
+
+        function generateSubnav(containerId, categories, currentFilter, onFilterChange) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            for (const [key, value] of Object.entries(categories)) {
                 const tag = document.createElement('span');
-                tag.className = 'subnav-tag' + (key === 'all' ? ' active' : '');
+                tag.className = 'subnav-tag' + (key === currentFilter ? ' active' : '');
                 tag.dataset.sub = key;
                 tag.textContent = value;
                 tag.addEventListener('click', () => {
-                    // 切换激活状态
-                    document.querySelectorAll('.subnav-tag').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll(`#${containerId} .subnav-tag`).forEach(t => t.classList.remove('active'));
                     tag.classList.add('active');
-                    currentSnackFilter = key;
-                    renderSnacksGrid();
+                    onFilterChange(key);
                 });
-                subnavContainer.appendChild(tag);
+                container.appendChild(tag);
             }
-
-            // 判断是否需要展开按钮 (检测标签总高度是否超过一行)
             setTimeout(() => {
-                const subnavEl = document.getElementById('snacksSubnav');
-                const expandBtn = document.getElementById('subnavExpandBtn');
-                if (subnavEl.scrollHeight > subnavEl.clientHeight + 5) {
-                    expandBtn.style.display = 'flex';
-                } else {
-                    expandBtn.style.display = 'none';
+                const expandBtn = document.getElementById(containerId.replace('Subnav','ExpandBtn'));
+                if (expandBtn) {
+                    expandBtn.style.display = container.scrollHeight > container.clientHeight + 5 ? 'flex' : 'none';
                 }
             }, 100);
         }
 
-        // 渲染散装食品网格（根据筛选条件）
+        function generateBeverageSubnav() {
+            generateSubnav('beveragesSubnav', beverageSubCategories, currentBeverageFilter, (key) => {
+                currentBeverageFilter = key;
+                renderBeveragesGrid();
+            });
+        }
+        function generateSnackSubnav() {
+            generateSubnav('snacksSubnav', snackSubCategories, currentSnackFilter, (key) => {
+                currentSnackFilter = key;
+                renderSnacksGrid();
+            });
+        }
+
+        function renderBeveragesGrid() {
+            const grid = document.getElementById('beverages-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            products.beverages.filter(i => currentBeverageFilter === 'all' || i.subcategory === currentBeverageFilter)
+                .forEach(p => grid.appendChild(createItemCard(p)));
+        }
         function renderSnacksGrid() {
             const grid = document.getElementById('snacks-grid');
             if (!grid) return;
             grid.innerHTML = '';
-
-            const items = products.snacks.filter(item => {
-                if (currentSnackFilter === 'all') return true;
-                return item.subcategory === currentSnackFilter;
-            });
-
-            items.forEach(product => {
-                const itemCard = createItemCard(product);
-                grid.appendChild(itemCard);
-            });
+            products.snacks.filter(i => currentSnackFilter === 'all' || i.subcategory === currentSnackFilter)
+                .forEach(p => grid.appendChild(createItemCard(p)));
         }
 
-        // 创建商品卡片通用函数
         function createItemCard(product) {
-            const itemCard = document.createElement('div');
-            itemCard.className = 'item-card';
-            itemCard.dataset.id = product.id;
-            itemCard.dataset.name = product.name;
-            itemCard.dataset.price = product.price;
-
-            itemCard.innerHTML = `
-                <div class="item-image">
-                    <i class="${product.icon}"></i>
-                </div>
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            card.dataset.id = product.id;
+            card.dataset.name = product.name;
+            card.dataset.price = product.price;
+            card.innerHTML = `
+                <div class="item-image"><i class="${product.icon}"></i></div>
                 <div class="item-info">
                     <div class="item-title">${product.name}</div>
                     <div class="item-price">￥${product.price}</div>
@@ -876,132 +920,96 @@
                             <button class="increase">+</button>
                         </span>
                     </div>
-                </div>
-            `;
-
-            const quantityControl = itemCard.querySelector('.quantity-control');
-            quantityControl.querySelector('.increase').addEventListener('click', (e) => {
-                e.stopPropagation();
-                addToCart(product.id);
-                updateCartUI();
+                </div>`;
+            card.querySelector('.increase').addEventListener('click', (e) => {
+                e.stopPropagation(); addToCart(product.id); updateCartUI();
             });
-            quantityControl.querySelector('.decrease').addEventListener('click', (e) => {
-                e.stopPropagation();
-                removeFromCart(product.id);
-                updateCartUI();
+            card.querySelector('.decrease').addEventListener('click', (e) => {
+                e.stopPropagation(); removeFromCart(product.id); updateCartUI();
             });
-            return itemCard;
+            return card;
         }
 
-        // 生成所有非散装食品
         function generateAllProducts() {
-            for (const category in products) {
-                if (category === 'snacks') continue; // 散装食品单独处理
-                const grid = document.getElementById(`${category}-grid`);
+            for (const cat in products) {
+                if (cat === 'beverages' || cat === 'snacks') continue;
+                const grid = document.getElementById(`${cat}-grid`);
                 if (!grid) continue;
                 grid.innerHTML = '';
-                products[category].forEach(product => {
-                    grid.appendChild(createItemCard(product));
-                });
+                products[cat].forEach(p => grid.appendChild(createItemCard(p)));
             }
-            // 初始渲染散装食品（全部）
+            renderBeveragesGrid();
             renderSnacksGrid();
         }
 
         function addToCart(id) {
             let product = null;
-            for (const category in products) {
-                const found = products[category].find(p => p.id === id);
-                if (found) {
-                    product = found;
-                    break;
-                }
+            for (const cat in products) {
+                product = products[cat].find(p => p.id === id);
+                if (product) break;
             }
             if (!product) return;
-
-            if (cart[id]) {
-                cart[id].quantity++;
-            } else {
-                cart[id] = { id: product.id, name: product.name, price: product.price, quantity: 1 };
-            }
-
-            const quantityEl = document.querySelector(`.item-card[data-id="${id}"] .quantity`);
-            if (quantityEl) quantityEl.textContent = cart[id].quantity;
+            cart[id] = cart[id] || { id: product.id, name: product.name, price: product.price, quantity: 0 };
+            cart[id].quantity++;
+            const el = document.querySelector(`.item-card[data-id="${id}"] .quantity`);
+            if (el) el.textContent = cart[id].quantity;
         }
-
         function removeFromCart(id) {
-            if (cart[id] && cart[id].quantity > 1) {
+            if (!cart[id]) return;
+            if (cart[id].quantity > 1) {
                 cart[id].quantity--;
-                const quantityEl = document.querySelector(`.item-card[data-id="${id}"] .quantity`);
-                if (quantityEl) quantityEl.textContent = cart[id].quantity;
-            } else if (cart[id] && cart[id].quantity === 1) {
+            } else {
                 delete cart[id];
-                const quantityEl = document.querySelector(`.item-card[data-id="${id}"] .quantity`);
-                if (quantityEl) quantityEl.textContent = 0;
             }
+            const el = document.querySelector(`.item-card[data-id="${id}"] .quantity`);
+            if (el) el.textContent = cart[id] ? cart[id].quantity : 0;
         }
 
         function updateCartUI() {
-            const totalItems = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
-
+            const items = Object.values(cart);
+            const totalQty = items.reduce((s, i) => s + i.quantity, 0);
+            cartCount.textContent = totalQty;
             cartItems.innerHTML = '';
-            if (totalItems === 0) {
+            if (totalQty === 0) {
                 cartItems.innerHTML = '<div style="text-align:center; padding:40px; color:#999;">购物车为空</div>';
                 cartTotal.textContent = '￥0';
                 checkoutBtn.disabled = true;
                 return;
             }
-
             checkoutBtn.disabled = false;
             let total = 0;
-
-            Object.values(cart).forEach(item => {
-                const cartItemEl = document.createElement('div');
-                cartItemEl.className = 'cart-item';
+            items.forEach(item => {
                 const subtotal = item.price * item.quantity;
                 total += subtotal;
-
-                cartItemEl.innerHTML = `
+                const el = document.createElement('div');
+                el.className = 'cart-item';
+                el.innerHTML = `
                     <div class="cart-item-name">${item.name}</div>
                     <div class="cart-item-quantity">
                         <button class="decrease" data-id="${item.id}">-</button>
                         <span>${item.quantity}</span>
                         <button class="increase" data-id="${item.id}">+</button>
                     </div>
-                    <div class="cart-item-price">￥${formatPrice(subtotal)}</div>
-                `;
-                cartItems.appendChild(cartItemEl);
-
-                cartItemEl.querySelector('.increase').addEventListener('click', () => {
-                    addToCart(item.id);
-                    updateCartUI();
-                });
-                cartItemEl.querySelector('.decrease').addEventListener('click', () => {
-                    removeFromCart(item.id);
-                    updateCartUI();
-                });
+                    <div class="cart-item-price">￥${formatPrice(subtotal)}</div>`;
+                el.querySelector('.increase').addEventListener('click', () => { addToCart(item.id); updateCartUI(); });
+                el.querySelector('.decrease').addEventListener('click', () => { removeFromCart(item.id); updateCartUI(); });
+                cartItems.appendChild(el);
             });
-
             cartTotal.textContent = `￥${formatPrice(total)}`;
         }
 
-        function formatPrice(price) {
-            const fixed = price.toFixed(1);
-            return fixed.endsWith('.0') ? fixed.slice(0, -2) : fixed;
-        }
+        function formatPrice(p) { const f = p.toFixed(1); return f.endsWith('.0') ? f.slice(0,-2) : f; }
 
         function generateOrder() {
-            let resultText = '';
-            let total = 0;
+            let text = '', total = 0;
             Object.values(cart).forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                const cleanName = item.name.replace(/\s*\([^)]*\)/g, "");
-                resultText += `${cleanName}，${item.quantity}，${formatPrice(item.price)}，${formatPrice(itemTotal)}\n`;
+                const sum = item.price * item.quantity;
+                total += sum;
+                const clean = item.name.replace(/\s*\([^)]*\)/g, '');
+                text += `${clean}，${item.quantity}，${formatPrice(item.price)}，${formatPrice(sum)}\n`;
             });
-            resultText += `\n订单总计: ${formatPrice(total)}元`;
-            orderContent.textContent = resultText;
+            text += `\n订单总计: ${formatPrice(total)}元`;
+            orderContent.textContent = text;
             orderResult.style.display = 'flex';
             cartPanel.classList.remove('active');
         }
